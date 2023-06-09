@@ -3,12 +3,9 @@ import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
 import logo from "./favicon-32x32.png";
-import Modal from 'react-modal';
 import { deletePhoto } from "./db.js";
-import Form from './components/Form';
+import Form from "./components/Form";
 
-
-Modal.setAppElement('#root'); // Specify the root element of your app
 
 const FILTER_MAP = {
   All: () => true,
@@ -79,16 +76,16 @@ function App(props) {
       date: new Date().toLocaleString(),
       name,
       recorded: false,
-      location: { latitude: "##", longitude: "##", error: "##", mapLink: "##" },
+      location: { latitude: "##", longitude: "##", error: "##", mapLink: "##" }
     };
     setLastInsertedId(id);
     setTasks([...tasks, newTask]);
-  }
+  };
   
   function deleteTask(id){
     const remainingTasks = tasks.filter((task) => id !== task.id);
     setTasks(remainingTasks);
-    deletePhoto(id);
+    deletePhoto(id); //should delete photo and task - no orphans
   };
 
   function editTask(id, newName){
@@ -123,17 +120,20 @@ function App(props) {
     });
     setTasks(updatedTasks);
   };
-  function photoedTask(id) {
-    const photoedTaskList = tasks.map((task) => {
+  
+  
+  const photoedTask =(id)=>{
+    console.log('photoedTask', id)
+    const photoedTaskList = tasks.map(task=>{
       // if this task has the same ID as the edited task
-      if (id === task.id) {
-        return { ...task, photo: true };
+      if(id===task.id){
+        return {...task, photo: true}
       }
-      return task;
-    });
-    console.log(photoedTaskList);
-    setTasks(photoedTaskList);
-  };
+      return task
+    })
+    console.log(photoedTaskList)
+    setTasks(photoedTaskList)
+  }
 
   const taskList = tasks.filter(FILTER_MAP[filter]).map((task) => (
     <>
@@ -148,13 +148,14 @@ function App(props) {
         longitude={task.location.longitude}
         mapLink={task.location.mapLink}
         toggleTaskCompleted={toggleTaskCompleted}
+        addTask={addTask}
         deleteTask={deleteTask}
         editTask={editTask}
         photoedTask={photoedTask}
       
       />
     </>
-  ));
+  )); //removed photoedTask from the list just now.
 
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
@@ -170,7 +171,6 @@ function App(props) {
 
   return (
     <div className="todoapp stack-large">
-      <>
       <img src={logo} alt="Logo" />
       <h1>NatureNotation</h1>
       <Form addTask={addTask} geoFindMe={geoFindMe} />
@@ -184,7 +184,6 @@ function App(props) {
       >
         {taskList}
       </ul>
-      </>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import FindForm from "./FindForm";
+import Form from "./Form.js";
 import ViewPhoto from "./ViewPhoto.js";
 import PopupModal from "./PopupModal.js";
 
@@ -67,10 +67,10 @@ const ViewFind = (props) => {
   </button>
   <PopupModal isOpen={isModalOpen} onClose={handleCloseModal}>    
     <div>
-  <FindForm
+  <Form
    id={props.id}
    name={props.name}
-  ></FindForm>
+  ></Form>
   </div>
   </PopupModal> 
 

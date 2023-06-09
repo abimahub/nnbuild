@@ -17,8 +17,8 @@ export default function Todo(props) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState("");
   const [newComment, setNewComment] = useState('');
-  const editFieldRef = useRef(null);
-  const editButtonRef = useRef(null);
+  const editFieldRef = useRef(false);
+  const editButtonRef = useRef(false);
   const wasEditing = usePrevious(isEditing);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -117,6 +117,7 @@ export default function Todo(props) {
        <ViewFind
        id={props.id}
        alt={props.name}
+       name={props.name}
       ></ViewFind>
       </div>
       </Modal> 

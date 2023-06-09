@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root'); // Specify the root element of your app
 
-function PopupModal({ isOpen, onClose, children }) {
+  function PopupModal ({ isOpen, onClose, children }) {
     return (
       <Modal
         isOpen={isOpen}
@@ -15,4 +15,5 @@ function PopupModal({ isOpen, onClose, children }) {
       </Modal>
     );
   }
+
   export default PopupModal;

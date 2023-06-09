@@ -89,6 +89,9 @@ logo {
   display: inline-block;
   margin-top: 0.4rem;
 }
+.centre {
+  text-align: center;
+}
 .btn {
   padding: 0.8rem 1rem 0.7rem;
   border: 0.2rem solid rgba(1, 82, 1, 1);
